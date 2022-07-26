@@ -11,6 +11,19 @@ Italicized text is the *cat's meow*.
 
 This text is ***really important***.
 
+**这是加粗**
+__这也是加粗__
+*这是倾斜*
+_这也是倾斜_
+***这是加粗倾斜***
+~~这是加删除线~~
+
+* * *
+***
+**********
+- - -
+_________________
+
 > Dorothy followed her through many of the beautiful rooms in her castle.
 
 > Dorothy followed her through many of the beautiful rooms in her castle.
@@ -47,4 +60,7 @@ This text is ***really important***.
 
 这是一个链接 [Markdown语法](https://markdown.com.cn "最好的markdown教程")。
 
-
+    ```python
+    #!/usr/bin/env python3
+    print("Hello, World!");
+    ```
