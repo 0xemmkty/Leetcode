@@ -1,9 +1,9 @@
-#53. Maximum Subarray
+# 53. Maximum Subarray
 
 >Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.
 A subarray is a contiguous part of an array.
 
-##Solution 1(贪心)
+## Solution 1(贪心)
 
 2ms
 时间复杂度O(n),空间复杂度O(1)
@@ -27,7 +27,7 @@ A subarray is a contiguous part of an array.
     }
 };
 
-##Solution2 动态规划
+## Solution2 动态规划
 时间复杂度O(n),空间复杂度O(1)
 
     public class Solution {
@@ -49,7 +49,7 @@ A subarray is a contiguous part of an array.
     }
 ​
   
-##Solution 3(动态规划) 不优化空间版本
+## Solution 3(动态规划) 不优化空间版本
 
     public class Solution {
 
