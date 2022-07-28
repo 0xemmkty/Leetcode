@@ -64,3 +64,9 @@ _________________
     #!/usr/bin/env python3
     print("Hello, World!");
     ```
+
+```javascript
+$(document).ready(function () {
+    alert('RUNOOB');
+});
+```
