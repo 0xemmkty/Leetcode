@@ -13,6 +13,7 @@ Input: n = 5, and edges = [[0,1], [1,2], [2,3], [1,3], [1,4]]
 Output: false
 Note: you can assume that no duplicate edges will appear in edges. Since all edges are undirected, [0,1] is the same as [1,0] and thus will not appear together in edges.
 
+>判断一个图是否是一棵树。一个图是一棵树有很多等价条件，这里采用编程容易判断的一种，即**顶点数等于边数 + 1**并且**无环**。
 
 是否成环问题
 这道题可以联系 Leetcode 207. course schedule 一同分析，当我们把题意扯开，他们的核心都是判断一个图是有环图，还是无环图。
@@ -78,52 +79,121 @@ class Solution {
 ```
 ## Solution 2 DFS
 
-时间O(V * E)
+时空复杂度O(N+E)
+————————————————
 
-空间O(n)
 ```java
-class Solution {
+public class Solution {
     public boolean validTree(int n, int[][] edges) {
-        // create graph
-        List<List<Integer>> g = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            g.add(new ArrayList<>());
-        }
-        for (int[] e : edges) {
-            g.get(e[0]).add(e[1]);
-            g.get(e[1]).add(e[0]);
-        }
-
-        HashSet<Integer> visited = new HashSet<>();
-        visited.add(0);
-        boolean res = helper(g, visited, 0, -1);
-        if (res == false) {
+    	// 如果顶点和边不满足关系式，则直接返回false
+        if (n - 1 != edges.length) {
             return false;
         }
-        return visited.size() == n ? true : false;
-    }
-
-    private boolean helper(List<List<Integer>> g, HashSet<Integer> visited, int cur, int parent) {
-        List<Integer> neighbors = g.get(cur);
-        for (int nei : neighbors) {
-            if (nei == parent) {
-                continue;
-            }
-            // cycle
-            if (visited.contains(nei)) {
-                return false;
-            }
-            visited.add(nei);
-            boolean res = helper(g, visited, nei, cur);
-            if (res == false) {
+        // 用邻接表建图
+        Map<Integer, Set<Integer>> graph = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            graph.put(i, new HashSet<>());
+        }
+    
+        for (int i = 0; i < edges.length; i++) {
+            graph.get(edges[i][0]).add(edges[i][1]);
+            graph.get(edges[i][1]).add(edges[i][0]);
+        }
+        
+        boolean[] visited = new boolean[n];
+        for (int i = 0; i < n; i++) {
+        	// 如果顶点i未被访问过，则对其进行DFS。
+        	// 本次DFS后，与i连通的点将都会被访问掉。DFS返回一个boolean类型，代表有没有环
+            if (!visited[i] && dfs(graph, visited, i, i)) {
+            	// 有环则返回false
                 return false;
             }
         }
+        
         return true;
     }
+    
+    // 从s出发做DFS，parent指访问s之前上一个访问的节点。返回值是有没有环，有则返回true，没有返回false
+    private boolean dfs(Map<Integer, Set<Integer>> graph, boolean[] visited, int s, int parent) {
+    	// 先标记s为访问过
+        visited[s] = true;
+        // 遍历s的邻居，逐个访问
+        for (int neighbor : graph.get(s)) {
+            if (!visited[neighbor]) {
+                dfs(graph, visited, neighbor, s);
+            } else if (neighbor != parent) {
+            	// 如果发现某个邻居访问过，但不是在s之前刚刚访问的，就说明有环，返回true
+                return true;
+            }
+        }
+        // 否则说明无环，返回false
+        return false;
+    }
 }
+————————————————
+//版权声明：本文为CSDN博主「记录算法题解」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+//原文链接：https://blog.csdn.net/qq_46105170/article/details/104588770
+//
+//The idea is simple and straightforward：
+//1，the relation between vertices and edges : vertices = edges + 1 
+//2, Determine if a ring exists
+// use hashmap to store given value
+// create graph
+// dfs
+
 ```
-## Solution 3  (Union Find)
+## Solution 3  (better understanding Union Find)
+>法2：并查集(**很漂亮的思路**)。基本思想是这样的，构造一个并查集，**每次遍历一条边**的时候先查一下**两个顶点**是否已经**属于同一个集合**了，如果是，那就说明有环。
+
+>具体证明如下：如果u和v同属一个集合，说明有一条从u uu到v vv的路径。接下来，如果某一条边正好是( u , v ) (u,v)(u,v)，说明存在两条从u到v的路径，其中一条是走一步，另一条是从并查集的树根绕过去，这两条路径必然是不同的。根据法1相同的推理可以知道，有环。代码如下：
+空间复杂度O(N)，时间复杂度O(N+ElogV)，初始化parent需要O(N)，接着每次find需要O(logV)，一共find了O(2ElogV)次。
+
+```java
+public class Solution {
+    public boolean validTree(int n, int[][] edges) {
+        if (n - 1 != edges.length) {
+            return false;
+        }
+        // 记录顶点i的parent顶点
+        int[] parent = new int[n];
+        for (int i = 0; i < parent.length; i++) {
+        	// 初始化每个i的parent为自己
+            parent[i] = i;
+        }
+    
+        for (int i = 0; i < edges.length; i++) {
+            int pRoot = find(parent, edges[i][0]);
+            int qRoot = find(parent, edges[i][1]);
+            // 如果发现同属于一个集合，说明有环，返回false
+            if (pRoot == qRoot) {
+                return false;
+            }
+            // 否则做union操作
+            parent[pRoot] = qRoot;
+        }
+        
+        return true;
+    }
+    // 这里采取了路径压缩。在找树根的同时压缩路径
+    private int find(int[] parent, int p) {
+        while (p != parent[p]) {
+        	// 如果p不是树根，就把它的树根挪上去，同时p自己向上走一步
+            parent[p] = parent[parent[p]];
+            p = parent[p];
+        }
+        
+        return p;
+    }
+}
+//idea is easy， I think you can understand it without any hint :)
+```
+————————————————
+版权声明：本文为CSDN博主「记录算法题解」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/qq_46105170/article/details/104588770
+
+
+
+## Solution 4  (Union Find)
 时间O(V * E)
 
 空间O(n)
