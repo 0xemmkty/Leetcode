@@ -34,6 +34,8 @@ Note: you can assume that no duplicate edges will appear in edges. Since all edg
 这道题属于图和树的综合题。给的input是节点的个数n和一些边edges，请你判断能否组成一棵树。有一个概念需要复习，树和图的区别在于图是可以有环 (cycle) 的，树不能有环；同时图的节点有可能不会连在一片，但是树的所有节点必定都是相连成一片的。对于这道题，有一些corner case需要特判，如果只有一个节点的话，那么就一定没有edges；因为题设说了不会给额外的边，所以如果边的数量 != 节点数量 - 1的话，一定不是树。
 
 照着这个思路，我还是提供三种做法，BFS, DFS和Union Find。三种做法的时间空间复杂度都一样，union find在运行时间上可以通过路径压缩变得更快。
+
+>**(优先看solution 2和3)**
 ## Solution 1 BFS
 
 时间O(V * E)
