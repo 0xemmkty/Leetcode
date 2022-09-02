@@ -51,6 +51,9 @@ class Solution {
         return order;
     }
 }
+// mn的总数为边界
+// 每个访问一次
+// 按顺序存入数组
 ```
 
 ## Solution 2 
