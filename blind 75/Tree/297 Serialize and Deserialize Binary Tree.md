@@ -1,12 +1,14 @@
-# 297. Serialize and Deserialize Binary Tree
+# 297. Serialize and Deserialize Binary Tree （待）
 
 >**Serialization** is the process of converting a data structure or object into a sequence of bits so that it can be stored in a file or memory buffer, or transmitted across a network connection link to be reconstructed later in the same or another computer environment.
 Design an algorithm to serialize and deserialize a binary tree. There is no restriction on how your serialization/deserialization algorithm should work. You just need to ensure that a binary tree can be serialized to a string and this string can be deserialized to the original tree structure.
 **Clarification**: The input/output format is the same as how LeetCode serializes a binary tree. You do not necessarily need to follow this format, so please be creative and come up with different approaches yourself.
 
->
+>不好说看懂了，但大概就是比起普通遍历，多了填写null？？
 
 >（包含前序/后序/层次遍历）参考：https://www.cnblogs.com/labuladong/p/13975069.html
+
+>solution 的来源：https://leetcode.cn/problems/serialize-and-deserialize-binary-tree/solution/shou-hui-tu-jie-gei-chu-dfshe-bfsliang-chong-jie-f/
 ## Solution 1 (BFS)
 ```java
 /**
