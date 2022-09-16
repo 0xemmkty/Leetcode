@@ -112,6 +112,7 @@ class MedianFinder {
         return (queMin.peek() + queMax.peek()) / 2.0;
     }
 }
+```
 复杂度分析
 
 时间复杂度：
@@ -120,5 +121,3 @@ addNum: O(logn)，其中 n为累计添加的数的数量。
 findMedian: O(1)。
 空间复杂度：O(n)，主要为优先队列的开销。
 
-
-```
