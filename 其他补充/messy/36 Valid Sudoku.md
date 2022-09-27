@@ -96,7 +96,7 @@ class Solution {
         return true;
     }
 }
-
+// compare hashmap with arrays, interesting!! find the similar and different part. hhh
 ```
 时间复杂度：在固定 9∗9 的问题里，计算量不随数据变化而变化。复杂度为 O(1)
 空间复杂度：在固定 9*9 的问题里，存储空间不随数据变化而变化。复杂度为 O(1)
