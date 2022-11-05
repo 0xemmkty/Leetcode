@@ -7,7 +7,7 @@ A subarray is a contiguous part of an array.
 
 2ms
 时间复杂度O(n),空间复杂度O(1)
-
+```java
     class Solution {
     public int maxSubArray(int[] nums) {
     /*
@@ -26,7 +26,7 @@ A subarray is a contiguous part of an array.
     	return maxans;
     }
 };
-
+```
 ## Solution2 动态规划
 时间复杂度O(n),空间复杂度O(1)
 

@@ -71,3 +71,60 @@ class MinStack {
  // interesting to use just one stack
  // and the pair to store the value and the mini value in the stack
  ```
+
+ ## Solution 2 (use self-defi node) faster runtime that the solution 1
+ ```java
+ /**
+ * 通过自定义链表实现，每个节点存储当前值，当前最小值，和它前面的节点
+ * 执行用时：5 ms, 在所有 Java 提交中击败了99.84%的用户
+ * 内存消耗：40.4 MB, 在所有 Java 提交中击败了47.08%的用户
+ * */
+class MinStack {
+
+    private Node node;
+
+    public MinStack() {
+
+    }
+
+    public void push(int x) {
+        if (node == null){
+            node = new Node(x, x);
+        }else {
+            // node = new Node(x, Math.min(x, node.min), node);
+            Node next = new Node(x, Math.min(x, node.min));
+            next.prev = node;
+            node = next;
+        }
+    }
+
+    public void pop() {
+        node = node.prev;
+    }
+
+    public int top() {
+        return node.val;
+    }
+
+    public int getMin() {
+        return node.min;
+    }
+
+    private class Node {
+        int val;
+        int min;
+        Node prev;
+
+        private Node(int val, int min){
+            this.val = val;
+            this.min = min;
+        }
+
+        private Node(int val, int min, Node prev){
+            this.val = val;
+            this.min = min;
+            this.prev = prev;
+        }
+    }
+}
+```
