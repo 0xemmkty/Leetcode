@@ -8,6 +8,10 @@
 int add(int val) Appends the integer val to the stream and returns the element representing the kth largest element in the stream.
 
 ## Solution 1
+```
+我在解题前想到heap，但是没有意识到优先队列，的自带排序
+```
+
 先说一个最暴力的解法：我们底层数据结构使用数组实现，当每次调用 add() 函数时，向数组中添加一个元素，然后调用 sort() 函数进行排序，返回排序后数组的第 KKK 个数字。该做法在每次调用 add() 函数时的时间复杂度为 O(K∗log(K))O(K*log(K))O(K∗log(K)) ，该时间复杂度太高，当 KKK 很大 / add()调用次数太多的时候，一定会超时。
 
 从上面的分析中，我们已经看出来了，使用数组的核心问题是：数组自身不带排序功能，只能用 sort() 函数，导致时间复杂度过高。
