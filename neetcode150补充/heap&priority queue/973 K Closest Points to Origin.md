@@ -64,7 +64,7 @@ class Solution {
 
 空间复杂度：O(logn)，排序所需额外的空间复杂度为 O(logn)。
 
-## solution 3
+## solution 3 (快排)
 方法三：快速选择（快速排序的思想）
 
 思路和算法
@@ -127,4 +127,55 @@ class Solution {
 }
 
 
+```
+
+另一版本快排，符合代码规律
+```java
+class Solution {
+    public int[][] kClosest(int[][] points, int k) {
+        quickSort(points, 0, points.length - 1, k);
+        return Arrays.copyOfRange(points, 0, k);
+    }
+
+    private void quickSort(int[][] points, int left, int right, int k) {
+        if (left < right) {
+            int pviotPosition = partition(points, left, right);
+            if (pviotPosition == k - 1) {
+                return;
+            } else if (pviotPosition > k - 1) {
+                quickSort(points, left, pviotPosition - 1, k);
+            } else {
+                quickSort(points, pviotPosition + 1, right, k);
+            }
+        }
+    }
+
+    private int partition(int[][] points, int left, int right) {
+        swap(points, left, (left + right) / 2);
+        int[] pviotNum = points[left];
+        int distance = distance(pviotNum);
+        while (left < right) {
+            while (left < right && distance(points[right]) > distance) {
+                right--;
+            }
+            points[left] = points[right];
+            while (left < right && distance(points[left]) <= distance) {
+                left++;
+            }
+            points[right] = points[left];
+        }
+        points[left] = pviotNum;
+        return left;
+    }
+
+    private int distance(int[] point) {
+        return point[0] * point[0] + point[1] * point[1];
+    }
+
+    private void swap(int[][] points, int a, int b) {
+        int[] temp = points[a];
+        points[a] = points[b];
+        points[b] = temp;
+    }
+}
 ```
