@@ -228,3 +228,78 @@ class Solution {
 
 ```
 
+## Solution 
+遍历所有链表，把结点放入一个动态数组，对动态数组排序，然后再把动态数组转成链表
+```java
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.PriorityQueue;
+
+class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode(int x) {
+        val = x;
+    }
+
+    ListNode(Integer[] nums) {
+        ListNode currNode = this;
+        currNode.val = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            currNode.next = new ListNode(nums[i]);
+            currNode = currNode.next;
+        }
+    }
+
+    @Override
+    public String toString() {
+        ListNode currNode = this;
+        StringBuilder s = new StringBuilder();
+        while (currNode != null) {
+            s.append(currNode.val);
+            s.append(" -> ");
+            currNode = currNode.next;
+        }
+        // 最后添加一个 NULL 标志表示添加到末尾了
+        s.append("NULL");
+        return s.toString();
+    }
+}
+
+
+public class Solution {
+
+    public ListNode mergeKLists(ListNode[] lists) {
+        List<Integer> arr = new ArrayList<>();
+
+        for (ListNode listNode : lists) {
+            if (listNode != null) {
+                ListNode curNode = listNode;
+                while (curNode != null) {
+                    arr.add(curNode.val);
+                    curNode = curNode.next;
+                }
+            }
+        }
+
+        Collections.sort(arr);
+
+        ListNode dummyNode = new ListNode(-1);
+        ListNode curNode = dummyNode;
+        int size = arr.size();
+        for (int i = 0; i < size; i++) {
+            curNode.next = new ListNode(arr.get(i));
+            curNode = curNode.next;
+        }
+        return dummyNode.next;
+    }
+}
+
+作者：liweiwei1419
+链接：https://leetcode.cn/problems/merge-k-sorted-lists/solutions/9053/tan-xin-suan-fa-you-xian-dui-lie-fen-zhi-fa-python/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+```
