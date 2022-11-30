@@ -79,7 +79,7 @@ class Solution {
                 
         int l = 0, r = (int)1e9;
         while (l < r) {
-            int mid = l + r >> 1;
+            int mid = l + r >> 1; // /2
             if (check(nums, mid)) {
                 r = mid;
             } else {
