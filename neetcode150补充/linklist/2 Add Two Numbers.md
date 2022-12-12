@@ -1,4 +1,5 @@
 # 2. Add Two Numbers
+(顺便复习445，高位数在前面，又不让反转链表，于是使用stack+循环)
 
 >You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.
 

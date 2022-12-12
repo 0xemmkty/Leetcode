@@ -8,7 +8,8 @@ Given the sorted rotated array nums of unique elements, return the minimum eleme
 You must write an algorithm that runs in O(log n) time.
 
 ## Solution 1 (二分查找)
-
+为什么能用二分？
+要找的是左半部分的右边界
     class Solution {
     public int findMin(int[] nums) {
         int left = 0;
