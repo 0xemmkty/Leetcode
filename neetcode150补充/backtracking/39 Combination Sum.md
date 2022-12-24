@@ -8,9 +8,20 @@ The test cases are generated such that the number of unique combinations that su
 
 >**the different between lc39 and lc40 is the use time of number in the question.**
 
+```
+Example 1:
+
+Input: candidates = [2,3,6,7], target = 7
+Output: [[2,2,3],[7]]
+Explanation:
+2 and 3 are candidates, and 2 + 2 + 3 = 7. Note that 2 can be used multiple times.
+7 is a candidate, and 7 = 7.
+These are the only two combinations.
+```
+
 ## Solution 1 (without 优化，优化版本见S2)
 
-```
+```java
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
