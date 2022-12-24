@@ -9,7 +9,7 @@ Input: nums = [4,3,2,3,5,2,1], k = 4
 Output: true
 Explanation: It is possible to divide it into 4 subsets (5), (1, 4), (2,3), (2,3) with equal sums.
 ```
-## Solution 1 （回溯，球视角）
+## Solution 1 （回溯，球视角--这个球进哪个桶）
 https://leetcode.cn/problems/partition-to-k-equal-sum-subsets/solution/by-lfool-d9o7/
 
 
@@ -51,7 +51,8 @@ private boolean backtrack(int[] nums, int index, int[] bucket, int k, int target
 }
 ```
 
-## Solution 2 （回溯，桶视角） 简略看看，主要是看网址的优化过程和分析过程
+## Solution 2 （回溯，桶视角——这个桶收哪个球）
+ 简略看看，主要是看网址的优化过程和分析过程
 ```java
 // 备忘录，存储 used 的状态
 private HashMap<Integer, Boolean> memo = new HashMap<>();
