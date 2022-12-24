@@ -1,4 +1,7 @@
 **回溯算法与深度优先遍历**
+回溯算法事实上就是在一个树形问题上做深度优先遍历，因此 首先需要把问题转换为树形问题
+剪枝的一个重点是排序，arraysort
+
 https://leetcode.cn/problems/permutations/solution/hui-su-suan-fa-python-dai-ma-java-dai-ma-by-liweiw/ (有例题)
 
 以下是维基百科中「回溯算法」和「深度优先遍历」的定义。
@@ -27,3 +30,57 @@ https://leetcode.cn/problems/permutations/solution/hui-su-suan-fa-python-dai-ma-
 链接：https://leetcode.cn/problems/permutations/solution/hui-su-suan-fa-python-dai-ma-java-dai-ma-by-liweiw/
 来源：力扣（LeetCode）
 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+模板1
+```
+  private void dfs(一些参数) {
+        //递归必须要有终止条件
+        if ("终止条件") {
+            //1，执行一些操作（可有可无，视情况而定）
+            return;
+        }
+        //通过循环，分别遍历9个子树
+        for (int i = 0; i < 9; i++) {
+            //2，一些操作，可有可无，视情况而定
+
+            //递归
+            dfs(一些参数);
+
+            //3，一些操作，可有可无，视情况而定
+        }
+    }
+
+```
+回溯模板2
+```
+private void backtrack("原始参数") {
+    //终止条件(递归必须要有终止条件)
+    if ("终止条件") {
+        //一些逻辑操作（可有可无，视情况而定）
+        return;
+    }
+
+    for (int i = "for循环开始的参数"; i < "for循环结束的参数"; i++) {
+        //一些逻辑操作（可有可无，视情况而定）
+
+        //做出选择
+
+        //递归
+        backtrack("新的参数");
+        //一些逻辑操作（可有可无，视情况而定）
+
+        //撤销选择
+    }
+}
+```
+
+> 一些参考资料
+
+排列、组合等题
+https://lfool.github.io/LFool-Notes/algorithm/%E6%8E%92%E5%88%97-%E7%BB%84%E5%90%88-%E5%AD%90%E9%9B%86%E9%97%AE%E9%A2%98.html
+
+回溯框架：
+https://lfool.github.io/LFool-Notes/algorithm/%E5%9B%9E%E6%BA%AF(DFS).html
+
+秒杀所有岛屿题
+https://lfool.github.io/LFool-Notes/algorithm/%E7%A7%92%E6%9D%80%E6%89%80%E6%9C%89%E5%B2%9B%E5%B1%BF%E9%A2%98%E7%9B%AE(DFS).html
