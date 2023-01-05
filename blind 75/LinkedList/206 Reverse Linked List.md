@@ -18,7 +18,7 @@ Given the head of a singly linked list, reverse the list, and return the reverse
 class Solution {
 	public ListNode reverseList(ListNode head) {
 		//申请节点，pre和 cur，pre指向null
-		ListNode pre = null;
+		ListNode pre = null; // head 前面的null，方便反转后的最后一个节点指向null
 		ListNode cur = head;
 		ListNode tmp = null;
 		while(cur!=null) {
@@ -77,4 +77,27 @@ class Solution {
 // head.next.next = head; 反转
 // head.next = null; 断链
 // 注意：带next的是指指针（连接），不带next才是值（某个点）
+```
+
+使用pre和cur的递归
+```java
+// 递归 
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        return reverse(null, head);
+    }
+
+    private ListNode reverse(ListNode prev, ListNode cur) {
+        if (cur == null) {
+            return prev;
+        }
+        ListNode temp = null;
+        temp = cur.next;// 先保存下一个节点
+        cur.next = prev;// 反转
+        // 更新prev、cur位置
+        // prev = cur;
+        // cur = temp;
+        return reverse(cur, temp);
+    }
+}
 ```
