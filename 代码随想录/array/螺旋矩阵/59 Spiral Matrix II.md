@@ -14,8 +14,12 @@ class Solution {
         int[][] mat = new int[n][n];
         int num = 1, tar = n * n;
         while(num <= tar){
+            // 此处，r是第一层的右边界
             for(int i = l; i <= r; i++) mat[t][i] = num++; // left to right.
+            // t 不随 for变化， 即t只变化了一次
+            // 这里 t+1 因为第一层满了，要向下一层
             t++;
+            // r 同理
             for(int i = t; i <= b; i++) mat[i][r] = num++; // top to bottom.
             r--;
             for(int i = r; i >= l; i--) mat[b][i] = num++; // right to left.
