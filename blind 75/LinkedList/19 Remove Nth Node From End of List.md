@@ -1,4 +1,4 @@
-19. Remove Nth Node From End of List
+# 19. Remove Nth Node From End of List
 
 Given the head of a linked list, **remove the nth node from the end of the list** and return its head.
 
@@ -69,4 +69,30 @@ class Solution {
 }
 // index1.next = index1.next.next; 断链又重新连
 // idea: tow pointer, at first point at head, then let p2 move Nth(Nth far from p1, then let p2 reach the end, finally cut off the linklist and rebuil it)
+```
+
+
+```java
+public ListNode removeNthFromEnd(ListNode head, int n){
+    ListNode dummyNode = new ListNode(0);
+    dummyNode.next = head;
+
+    ListNode fastIndex = dummyNode;
+    ListNode slowIndex = dummyNode;
+
+    //只要快慢指针相差 n 个结点即可
+    for (int i = 0; i < n  ; i++){
+        fastIndex = fastIndex.next;
+    }
+
+    while (fastIndex.next != null){
+        fastIndex = fastIndex.next;
+        slowIndex = slowIndex.next;
+    }
+
+    //此时 slowIndex 的位置就是待删除元素的前一个位置。
+    //具体情况可自己画一个链表长度为 3 的图来模拟代码来理解
+    slowIndex.next = slowIndex.next.next;
+    return dummyNode.next;
+}
 ```
