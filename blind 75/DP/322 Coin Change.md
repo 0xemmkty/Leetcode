@@ -4,6 +4,9 @@
 Return the fewest number of coins that you need to make up that amount. If that amount of money cannot be made up by any combination of the coins, return -1.
 You may assume that you have an infinite number of each kind of coin.
 
+>动态规划：518.零钱兑换II中求的是组合数，动态规划：377. 组合总和 Ⅳ中求的是排列数。
+而本题是要求最少硬币数量，硬币是组合数还是排列数都无所谓！所以两个for循环先后顺序怎样都可以！
+
 ```
 Example 1:
 
@@ -56,6 +59,32 @@ public class Solution {
 >时间复杂度：O(Sn)，其中 S 是金额，n 是面额数。我们一共需要计算 O(S) 个状态，S 为题目所给的总金额。对于每个状态，每次需要枚举 nn 个面额来转移状态，所以一共需要 O(Sn) 的时间复杂度。
 空间复杂度：O(S)。数组 dp 需要开长度为总金额 S 的空间。
 
+代码随想录
+```java
+class Solution {
+    public int coinChange(int[] coins, int amount) {
+        int max = Integer.MAX_VALUE;
+        int[] dp = new int[amount + 1];
+        //初始化dp数组为最大值
+        for (int j = 0; j < dp.length; j++) {
+            dp[j] = max;
+        }
+        //当金额为0时需要的硬币数目为0
+        dp[0] = 0;
+        for (int i = 0; i < coins.length; i++) {
+            //正序遍历：完全背包每个硬币可以选择多次
+            for (int j = coins[i]; j <= amount; j++) {
+                //只有dp[j-coins[i]]不是初始最大值时，该位才有选择的必要
+                if (dp[j - coins[i]] != max) {
+                    //选择硬币数目最小的情况
+                    dp[j] = Math.min(dp[j], dp[j - coins[i]] + 1);
+                }
+            }
+        }
+        return dp[amount] == max ? -1 : dp[amount];
+    }
+}
+```
 ## Solution 2 (记忆化搜索) 欠
 ```java
 class Solution {
