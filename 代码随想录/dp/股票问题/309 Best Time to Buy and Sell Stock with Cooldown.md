@@ -73,6 +73,7 @@ class Solution { public: int maxProfit(vector<int>& prices) {
 }
 };
 ```
+
 ```java
 class Solution {
     public int maxProfit(int[] prices) {
