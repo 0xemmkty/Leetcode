@@ -1,12 +1,13 @@
 # 1143. Longest Common Subsequence
-
+对比lc718： 本题和动态规划：718. 最长重复子数组区别在于这里不要求是连续的了，但要有相对顺序，即："ace" 是 "abcde" 的子序列，但 "aec" 不是 "abcde" 的子序列。
+```
 Given two strings text1 and text2, return the length of their longest common subsequence. If there is no common subsequence, return 0.
 
 A subsequence of a string is a new string generated from the original string with some characters (can be none) deleted without changing the relative order of the remaining characters.
 
 For example, "ace" is a subsequence of "abcde".
 A common subsequence of two strings is a subsequence that is common to both strings.
-
+```
 ```
 Example 1:
 
@@ -16,6 +17,10 @@ Explanation: The longest common subsequence is "ace" and its length is 3.
 ```
 
 ## Solution 1 (DP)
+代码随想录讲解：
+https://github.com/youngyangyang04/leetcode-master/blob/master/problems/1143.%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97.md
+
+
 二维动态数组 常规套路
 ```
 分析：
