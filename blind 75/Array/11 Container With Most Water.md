@@ -26,7 +26,7 @@ Notice that you may not slant the container.
 时间复杂度 O(N)​： 双指针遍历一次底边宽度 N。
 空间复杂度 O(1)​： 变量 i , j, res 使用常数额外空间。
 
-
+```java
 
     class Solution {
     public int maxArea(int[] height) {
@@ -44,7 +44,7 @@ Notice that you may not slant the container.
     // 3. the meaning of the res(S) 
     // 4. just the lower one change the value (the reason analyse above)
     // 5. the THREE LINE of res is very interesting
-
+```
 
 
 作者：jyd
