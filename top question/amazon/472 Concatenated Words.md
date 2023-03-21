@@ -1,4 +1,4 @@
-# 472. Concatenated Words
+# 472. Concatenated Words （待学习）
 ```
 Given an array of strings words (without duplicates), return all the concatenated words in the given list of words.
 
@@ -15,7 +15,24 @@ Explanation: "catsdogcats" can be concatenated by "cats", "dog" and "cats";
 "ratcatdogcat" can be concatenated by "rat", "cat", "dog" and "cat".
 ```
 
-## Solution 1
+## Solution 1 （dp）
+```
+（1）题目要求： 判断当前词是否由两个及以上的词组成
+（2）核心思路： 1、字符串哈希； 2、DP数组更新
+ 
+ 
+（3）首先用白话整体过一遍我们做了什么：
+1、字符串哈希：（目标：为了查找，提高效率）
+ 给words中的每个word发一个身份证（哈希值），
+ 所有身份证给班主任保管（存入Set），以待后面查找
+2、DP数组更新：（目标：更新状态，判断是否符合题意）
+ 对被判断的word，把行李、包、人（对应word中每个字母）分开过安检（check）
+   情况一：中途发现你有违规物品了（-1），最后你肯定不合格。
+   情况二：检查到最后报警器都没响，你合格了，放入res中。
+
+```
+![avatar](./pic/1.png)
+### 如上图，要注意的1.含义；2.check的时候大于等于2
 ```java
 class Solution {
     int P = 131, OFFSET = 128;
