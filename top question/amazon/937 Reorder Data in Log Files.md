@@ -65,3 +65,5 @@ class Solution(object):
         letters.sort()
         return [letter[1] + " " + letter[0] for letter in letters] + nums
 ```
+时间复杂度：O(N∗log(N))
+空间复杂度：O(N)
