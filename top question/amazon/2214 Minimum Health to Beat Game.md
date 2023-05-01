@@ -31,3 +31,4 @@ class Solution:
         return total + 1 - min(armor, maxDamage)
 
 ```
+

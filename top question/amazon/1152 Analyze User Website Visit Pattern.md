@@ -1,4 +1,4 @@
-# [LeetCode] 1152. Analyze User Website Visit Pattern
+# [LeetCode] 1152. Analyze User Website Visit Pattern (欠)
 
 You are given two string arrays username and website and an integer array timestamp. All the given arrays are of the same length and the tuple [username[i], website[i], timestamp[i]] indicates that the user username[i] visited the website website[i] at time timestamp[i].
 
@@ -154,6 +154,10 @@ class Solution(object):
         return res
 ```
 ## 暴力解法
+这个问题首先不难想到暴力解法，我们可以现将[username,timestamp,website]按照这种方式将元素排序（这样就可以保证所有相同姓名的元素按照timestamp排在一起）。然后我们可以暴力枚举相同姓名的人所有访问的website的组合方式，我们可以通过itertools.combinations轻松实现这一点。接着就是建立一个字典，将相同website组合的人添加进去。最后我们只要按照所有website组合的人数去排列，我们选择人数最多的那个website组合即可
+————————————————
+版权声明：本文为CSDN博主「coordinate_blog」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/qq_17550379/article/details/99209763
 ```python
 class Solution:
     def mostVisitedPattern(self, username: List[str], timestamp: List[int], website: List[str]) -> List[str]:
