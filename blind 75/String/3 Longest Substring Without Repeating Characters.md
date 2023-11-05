@@ -22,6 +22,28 @@ class Solution {
     }
 }
 ```
+```python
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        charSet = set()
+        left = 0
+        result = 0
+        
+        for right in range(len(s)):
+            while s[right] in charSet:
+                charSet.remove(s[left])
+                left += 1
+            charSet.add(s[right])
+            result = max(result, right - left + 1)
+        
+        return result
+```
+
+
 ```
 时间复杂度：O(N)，其中 N 是字符串的长度。左指针和右指针分别会遍历整个字符串一次。
 
