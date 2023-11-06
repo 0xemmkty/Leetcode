@@ -51,3 +51,46 @@ Notice that you may not slant the container.
 链接：https://leetcode.cn/problems/container-with-most-water/solution/container-with-most-water-shuang-zhi-zhen-fa-yi-do/
 来源：力扣（LeetCode）
 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+```python
+class Solution(object):
+    def maxArea(self, height):
+        """
+        :type height: List[int]
+        :rtype: int
+        """
+        left, right = 0, len(height) - 1
+        result = 0
+        
+        while left < right:
+            # Calculate the area
+            area = min(height[left], height[right]) * (right - left)
+            
+            # Update the maximum area found so far
+            result = max(result, area)
+            
+            # Move the pointer with the shorter height, because to increase the area, 
+            # we need to try a potentially taller height
+            if height[left] < height[right]:
+                left += 1
+            else:
+                right -= 1
+                
+        return result
+```
+
+```python
+class Solution:
+    def maxArea(self, height):
+        i, j = 0, len(height) - 1
+        res = 0
+        while i < j:
+            if height[i] < height[j]:
+                res = max(res, (j - i) * height[i])
+                i += 1
+            else:
+                res = max(res, (j - i) * height[j])
+                j -= 1
+        return res
+```
+>注意：重新自己写的时候还容易写成双重for-loop， 认真的，(双指针)循环一遍就够了
