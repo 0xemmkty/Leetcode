@@ -39,3 +39,26 @@ class Solution {
 
 时间复杂度：O(n)
 空间复杂度：O(1)
+
+```python
+class Solution(object):
+    def minSubArrayLen(self, target, nums):
+        """
+        :type target: int
+        :type nums: List[int]
+        :rtype: int
+        """
+        left = 0
+        sum = 0
+        result = float('inf')  # Equivalent to Integer.MAX_VALUE in Java
+        for right in range(len(nums)):
+            sum += nums[right]
+            while sum >= target:
+                result = min(result, right - left + 1)
+                sum -= nums[left]
+                left += 1
+        return 0 if result == float('inf') else result
+        # 用min的方式存的是record
+        # 注意题目要求， 返回的是长度
+
+```
