@@ -12,3 +12,44 @@ Output: "BANC"
 Explanation: The minimum window substring "BANC" includes 'A', 'B', and 'C' from string t.
 ```
 ## Solution 1
+```python
+class Solution:
+    def minWindow(self, s, t):
+        n, m = len(s), len(t)
+
+        # Create a hash table to store the count of characters in t
+        hash = [0] * 128
+        for ch in t:
+            hash[ord(ch)] -= 1
+
+        res = ""
+        cnt = 0
+        j = 0
+        for i in range(n):
+            hash[ord(s[i])] += 1
+            # if in t, <0 at first, so after add will be <=0
+            # if not in t, at first is 0, after add will be >0
+            if hash[ord(s[i])] <= 0:
+                # count for the number of element it cover
+                cnt += 1
+            # 算法的思路是从最左开始一路往右，找到全部cover的情况（cnt=m）
+            # 所以会出现一开始的最左有不需要的东西
+            # 所以开始缩小窗口
+            while cnt == m and hash[ord(s[j])] > 0:
+                hash[ord(s[j])] -= 1
+                j += 1
+
+            # check empty or find the min(if current window is smaller than res)
+            if cnt == m:
+                if res == "" or len(res) > i - j + 1:
+                    res = s[j:i + 1]
+
+        return res
+
+# Example usage
+solution = Solution()
+s = "ADOBECODEBANC"
+t = "ABC"
+print(solution.minWindow(s, t))
+
+```
