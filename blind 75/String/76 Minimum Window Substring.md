@@ -53,3 +53,40 @@ t = "ABC"
 print(solution.minWindow(s, t))
 
 ```
+
+```python
+class Solution(object):
+    def minWindow(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: str
+        """
+        chars = [ord(c) for c in s]
+        chart = [ord(c) for c in t]
+        n, m = len(chars), len(chart)
+
+        hash_map = [0] * 128
+        for ch in chart:
+            hash_map[ch] -= 1
+
+        res = ""
+        i = j = cnt = 0
+        while i < n:
+            hash_map[chars[i]] += 1
+            if hash_map[chars[i]] <= 0:
+                cnt += 1
+            while cnt == m and hash_map[chars[j]] > 0:
+                hash_map[chars[j]] -= 1
+                j += 1
+            if cnt == m:
+                if not res or len(res) > i - j + 1:
+                    res = s[j:i + 1]
+            i += 1
+
+        return res
+
+            
+        
+
+```
