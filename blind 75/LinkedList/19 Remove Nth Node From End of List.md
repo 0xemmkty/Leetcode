@@ -3,7 +3,7 @@
 Given the head of a linked list, **remove the nth node from the end of the list** and return its head.
 
 >见Solution 2
-
+(非常漂亮的思路 为什么会想到？快慢指针的差正好是n，漂亮)
 ## Solution 1(快慢指针,使用dummy)
 ```java
 class Solution {
@@ -26,6 +26,30 @@ class Solution {
     }
 }
 ```
+```python
+def removeNthFromEnd(self, head, n):
+        dummy = ListNode(-1)
+        dummy.next = head
+        pre = dummy
+        slow = head
+        fast = head
+
+        # Move fast pointer n steps ahead
+        for _ in range(n):
+            fast = fast.next
+
+        # Move fast to the end, maintaining the gap
+        while fast:
+            pre = pre.next
+            slow = slow.next
+            fast = fast.next
+
+        # Skip the desired node
+        pre.next = slow.next
+
+        return dummy.next
+```
+
 
 优化 删去slow， 直接pre.next.next
 ```java
@@ -95,4 +119,29 @@ public ListNode removeNthFromEnd(ListNode head, int n){
     slowIndex.next = slowIndex.next.next;
     return dummyNode.next;
 }
+```
+
+```python
+def removeNthFromEnd(self, head, n):
+        dummy = ListNode(-1)
+        dummy.next = head
+        pre = dummy
+        slow = head
+        fast = head
+
+        # Move fast pointer n steps ahead
+        for _ in range(n):
+            fast = fast.next
+
+        # Move fast to the end, maintaining the gap
+        while fast:
+            pre = pre.next
+            slow = slow.next
+            fast = fast.next
+
+        # Skip the desired node
+        pre.next = slow.next
+
+        return dummy.next
+
 ```
