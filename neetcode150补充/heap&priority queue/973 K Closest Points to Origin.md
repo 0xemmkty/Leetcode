@@ -8,6 +8,26 @@
 
 
 注意是k closet 而不是 kth closet
+
+```python
+class Solution:
+    def kClosest(self, points, k):
+        # Sort the points based on the squared distance from the origin
+        points.sort(key=lambda point: point[0]**2 + point[1]**2)
+
+        # Return the first k points
+        return points[:k]
+
+# Example usage
+sol = Solution()
+points = [[3, 3], [5, -1], [-2, 4]]
+k = 2
+print(sol.kClosest(points, k))  # Outputs the k closest points to the origin
+
+
+```
+
+
 ## Solution 1 (heap)
 我们可以使用一个大根堆实时维护前 k 个最小的距离平方。
 
@@ -43,7 +63,39 @@ class Solution {
 时间复杂度：O(nlogk)，其中 n 是数组 points 的长度。由于大根堆维护的是前 k 个距离最小的点，因此弹出和插入操作的单次时间复杂度均为 O(logk)。在最坏情况下，数组里 n 个点都会插入，因此时间复杂度为 O(nlogk)。
 
 空间复杂度：O(k)，因为大根堆中最多有 k 个点。
+```python
+#python是小跟堆所以要用负距离
+import heapq
 
+def kClosest(points, k):
+    # Calculate the squared distance from the origin for each point
+    def distance(point):
+        return point[0]**2 + point[1]**2
+
+    # Create a max heap of the first k points
+    heap = []
+    for point in points[:k]:
+        # We use negative distance because heapq is a min heap
+        heapq.heappush(heap, (-distance(point), point))
+
+    # Iterate over the remaining points
+    for point in points[k:]:
+        dist = -distance(point)
+        # Compare with the farthest point in the heap
+        if dist > heap[0][0]:
+            # Replace the farthest point with the current point
+            heapq.heapreplace(heap, (dist, point))
+
+    # Extract the k closest points
+    return [point for (_, point) in heap]
+
+# Example usage
+points = [[3, 3], [5, -1], [-2, 4], [1, 1]]
+k = 2
+print(kClosest(points, k))  # Output will be the k closest points to the origin
+
+
+```
 
 
 ## sOLUTION 2 (排序)
