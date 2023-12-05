@@ -6,6 +6,39 @@ Open brackets must be closed by the same type of brackets.
 Open brackets must be closed in the correct order.
 Every close bracket has a corresponding open bracket of the same type.
 
+
+
+```python
+class Solution(object):
+    def isValid(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        if len(s)%2==1:
+            return False
+        
+        stack = []
+        for char in s:
+            if char == "(":
+                stack.append(")")
+            elif char == "{":
+                stack.append("}")
+
+            elif char == "[":
+                stack.append("]")
+
+            else:
+                # 这里的not stack是指有反的括号没有正的括号（stack是空的）
+              if not stack or stack.pop() != char:
+                return False
+                # 如果stack不是空的说明有没有被匹配的反括号就会return false
+        return not stack
+
+            
+        
+
+```
 ## Solution 1
 这个写法看不是太懂，看下一个
 ```java
