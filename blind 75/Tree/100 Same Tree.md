@@ -10,7 +10,26 @@ Two binary trees are considered the same if they are structurally identical, and
 如果两个二叉树都不为空，那么首先判断它们的根节点的值是否相同，若不相同则两个二叉树一定不同，若相同，再分别判断两个二叉树的左子树是否相同以及右子树是否相同。这是一个递归的过程，因此可以使用深度优先搜索，递归地判断两个二叉树是否相同。
 
 >代码值得好好思考 递归很漂亮
-
+```python
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def isSameTree(self, p, q):
+        """
+        :type p: TreeNode
+        :type q: TreeNode
+        :rtype: bool
+        """
+        if not q and not p:
+            return True
+        if not q or not p or q.val != p.val:
+            return False
+        return self.isSameTree(q.left, p.left) and self.isSameTree(q.right, p.right)
+```
 ```java
 class Solution {
     public boolean isSameTree(TreeNode p, TreeNode q) {
