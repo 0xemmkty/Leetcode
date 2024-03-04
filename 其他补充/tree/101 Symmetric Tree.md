@@ -54,5 +54,5 @@ class Solution(object):
 
 这就是没有用help function的，并且你仔细想想就会知道哪里有问题
 hint：root的left和right没有判断
-        
+so本题用的不是纯递归，相当于是dfs
 ```
